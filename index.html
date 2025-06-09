@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выросли.рф - Консалтинг для крупного бизнеса</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #FAFAFA;
+            color: #000000;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2563EB;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000000;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2563EB;
+        }
+
+        /* Hero Section - Компактный */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #F0F9FF 0%, #FFF7ED 100%);
+            padding-top: 80px;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #2563EB, #F97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Animated Growth Elements */
+        .growth-element {
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(45deg, #2563EB, #F97316);
+            opacity: 0.3;
+            animation: growUp 3s ease-in-out infinite;
+        }
+
+        .growth-1 { left: 10%; height: 100px; animation-delay: 0s; }
+        .growth-2 { left: 25%; height: 150px; animation-delay: 0.5s; }
+        .growth-3 { right: 25%; height: 120px; animation-delay: 1s; }
+        .growth-4 { right: 10%; height: 180px; animation-delay: 1.5s; }
+
+        /* Trust Section - Компактная */
+        .trust-section {
+            padding: 40px 0;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .carousel-container {
+            margin: 30px 0;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            animation: slideLeft 30s linear infinite;
+            gap: 60px;
+            white-space: nowrap;
+        }
+
+        .carousel-reverse {
+            animation: slideRight 35s linear infinite;
+        }
+
+        .carousel-item {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 200px;
+            height: 80px;
+            background: #F8FAFC;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            font-weight: 500;
+            color: #64748B;
+            transition: all 0.3s;
+        }
+
+        .carousel-item:hover {
+            background: #EBF8FF;
+            border-color: #2563EB;
+            color: #2563EB;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1F2937;
+            margin-bottom: 15px;
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #F0F9FF 0%, #FFF7ED 100%);
+        }
+
+        .philosophy-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .philosophy h2 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #1F2937;
+        }
+
+        .philosophy p {
+            font-size: 20px;
+            color: #4B5563;
+            line-height: 1.8;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .process-card {
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 16px;
+            background: #FAFAFA;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .process-card:hover {
+            background: white;
+            border-color: #2563EB;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
+        }
+
+        .process-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #2563EB, #F97316);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+        }
+
+        .process-card h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #1F2937;
+        }
+
+        .process-card p {
+            color: #6B7280;
+            line-height: 1.6;
+        }
+
+        /* Contact Button */
+        .contact-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .contact-trigger {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2563EB, #F97316);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+            transition: all 0.3s;
+        }
+
+        .contact-trigger:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.4);
+        }
+
+        .contact-menu {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+        }
+
+        .contact-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .contact-option {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 12px 16px;
+            background: none;
+            border: none;
+            text-align: left;
+            color: #374151;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s;
+            margin-bottom: 8px;
+        }
+
+        .contact-option:hover {
+            background: #F3F4F6;
+            color: #2563EB;
+        }
+
+        .contact-option:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Statistics */
+        .stats {
+            padding: 80px 0;
+            background: #1F2937;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #F97316;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 16px;
+            color: #D1D5DB;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideLeft {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+
+        @keyframes slideRight {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes growUp {
+            0%, 100% { height: 20px; opacity: 0.2; }
+            50% { height: 200px; opacity: 0.6; }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero { min-height: 50vh; }
+            .hero h1 { font-size: 32px; }
+            .nav-links { display: none; }
+            .philosophy h2 { font-size: 32px; }
+            .contact-trigger { width: 50px; height: 50px; font-size: 20px; }
+            .process-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">выросли.рф</div>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#approach">Наш подход</a></li>
+                <li><a href="#cases">Истории роста</a></li>
+                <li><a href="#expertise">Экспертиза</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section - Компактный -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="growth-element growth-1"></div>
+            <div class="growth-element growth-2"></div>
+            <div class="growth-element growth-3"></div>
+            <div class="growth-element growth-4"></div>
+        </div>
+        <div class="hero-content">
+            <h1>ВЫРОСЛИ ВМЕСТЕ С НАМИ</h1>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="container">
+            <!-- Карусель с логотипами компаний (влево) -->
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="carousel-item">ПАО "Сбербанк"</div>
+                    <div class="carousel-item">ООО "Мегаполис"</div>
+                    <div class="carousel-item">АО "ТехноСтрой"</div>
+                    <div class="carousel-item">ООО "МедЦентр+"</div>
+                    <div class="carousel-item">ГК "Альфа-Групп"</div>
+                    <div class="carousel-item">ООО "РосТур"</div>
+                    <div class="carousel-item">АО "ПромИнвест"</div>
+                    <div class="carousel-item">ООО "ДевелоперПро"</div>
+                    <div class="carousel-item">ПАО "Сбербанк"</div>
+                    <div class="carousel-item">ООО "Мегаполис"</div>
+                    <div class="carousel-item">АО "ТехноСтрой"</div>
+                    <div class="carousel-item">ООО "МедЦентр+"</div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Работали в таких сферах, как</h2>
+
+            <!-- Карусель со сферами деятельности (вправо) -->
+            <div class="carousel-container">
+                <div class="carousel carousel-reverse">
+                    <div class="carousel-item">Недвижимость</div>
+                    <div class="carousel-item">Медицина</div>
+                    <div class="carousel-item">Гостиницы и туризм</div>
+                    <div class="carousel-item">Банковский сектор</div>
+                    <div class="carousel-item">ОПТовые продажи</div>
+                    <div class="carousel-item">Розница B2C</div>
+                    <div class="carousel-item">Поставки автомобилей</div>
+                    <div class="carousel-item">Франшизы</div>
+                    <div class="carousel-item">Частные школы и университеты</div>
+                    <div class="carousel-item">B2B услуги</div>
+                    <div class="carousel-item">Юриспруденция</div>
+                    <div class="carousel-item">Маркетинговые агентства</div>
+                    <div class="carousel-item">Промышленное производство</div>
+                    <div class="carousel-item">Недвижимость</div>
+                    <div class="carousel-item">Медицина</div>
+                    <div class="carousel-item">Гостиницы и туризм</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy">
+        <div class="container">
+            <div class="philosophy-content">
+                <h2>Мы не консультируем.<br>Мы растим бизнесы.</h2>
+                <p>Каждая компания уникальна. У каждой свои вызовы, возможности и амбиции. Мы не даем готовые решения — мы создаем индивидуальные стратегии роста, основанные на глубоком анализе вашего бизнеса и рынка.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <h2 class="section-title">Как мы работаем</h2>
+            <div class="process-grid">
+                <div class="process-card">
+                    <div class="process-icon">📊</div>
+                    <h3>Глубокий анализ</h3>
+                    <p>Изучаем ваш бизнес изнутри: процессы, финансы, команду, рынок и конкурентов</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-icon">🎯</div>
+                    <h3>Стратегия роста</h3>
+                    <p>Разрабатываем индивидуальную дорожную карту с конкретными целями и метриками</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-icon">⚡</div>
+                    <h3>Внедрение</h3>
+                    <p>Помогаем реализовать изменения, контролируем процесс и корректируем план</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-icon">📈</div>
+                    <h3>Масштабирование</h3>
+                    <p>Закрепляем результаты и готовим бизнес к следующему этапу развития</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 id="projects-count">0</h3>
+                    <p>Успешных проектов</p>
+                </div>
+                <div class="stat-item">
+                    <h3 id="growth-percent">0%</h3>
+                    <p>Средний рост оборота</p>
+                </div>
+                <div class="stat-item">
+                    <h3 id="experience-years">0</h3>
+                    <p>Лет опыта</p>
+                </div>
+                <div class="stat-item">
+                    <h3 id="industries-count">0</h3>
+                    <p>Отраслей экономики</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Button -->
+    <div class="contact-btn">
+        <button class="contact-trigger" onclick="toggleContactMenu()">💬</button>
+        <div class="contact-menu" id="contactMenu">
+            <button class="contact-option" onclick="makeCall()">📞 Позвонить</button>
+            <button class="contact-option" onclick="openWhatsApp()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px; vertical-align: middle;">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.690"/>
+                </svg>
+                Написать в WhatsApp
+            </button>
+            <button class="contact-option" onclick="openTelegram()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px; vertical-align: middle;">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+                Написать в Telegram
+            </button>
+            <button class="contact-option" onclick="sendEmail()">📧 Написать на почту</button>
+        </div>
+    </div>
+
+    <script>
+        let pendingAction = null;
+        let mouseMovements = 0;
+
+        // Contact menu toggle
+        function toggleContactMenu() {
+            const menu = document.getElementById('contactMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Close contact menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const contactBtn = document.querySelector('.contact-btn');
+            const menu = document.getElementById('contactMenu');
+            
+            if (!contactBtn.contains(e.target)) {
+                menu.classList.remove('active');
+            }
+        });
+
+        // Contact actions - БЕЗ КАПЧИ
+        function makeCall() {
+            window.open('tel:+79015701454', '_self');
+        }
+
+        function openWhatsApp() {
+            window.open('https://wa.me/79015701454', '_blank');
+        }
+
+        function openTelegram() {
+            window.open('https://t.me/+79015701454', '_blank');
+        }
+
+        function sendEmail() {
+            window.open('mailto:mail@выросли.рф', '_self');
+        }
+
+        // Animated counters
+        function animateCounter(id, target, suffix = '') {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                document.getElementById(id).textContent = Math.floor(current) + suffix;
+            }, 20);
+        }
+
+        // Initialize counters when stats section is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter('projects-count', 150);
+                    animateCounter('growth-percent', 67, '%');
+                    animateCounter('experience-years', 12);
+                    animateCounter('industries-count', 13);
+                    observer.disconnect();
+                }
+            });
+        });
+
+        observer.observe(document.querySelector('.stats'));
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
